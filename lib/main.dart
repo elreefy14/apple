@@ -1,12 +1,9 @@
-import 'dart:io';
-
 import 'package:bloc/bloc.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:masalriyadh/features/profile/manager/shipping_and_billing_cubit/shipping_and_billing_cubit.dart';
-import 'package:upgrader/upgrader.dart';
 
 import 'core/bloc_observer.dart';
 import 'core/services/banners_service.dart';
@@ -18,15 +15,11 @@ import 'core/services/data/remote/dio_services.dart';
 import 'core/services/order_service.dart';
 import 'core/services/register_services.dart';
 import 'core/services/wishlist_service.dart';
-import 'features/auth/presentation/view/login_view.dart';
-import 'features/auth/presentation/view/sign_up_view.dart';
 import 'features/cart/manager/cart_cubit/cart_cubit.dart';
 import 'features/home/manager/home_cubit/home_cubit.dart';
-import 'features/home/presentation/views/home_view.dart';
 import 'features/profile/manager/profile_cubit/profile_cubit.dart';
 import 'features/splash/presentation/splash_view.dart';
 import 'features/wishlist/manager/wishlist_cubit/wishlist_cubit.dart';
-import 'home_layout.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
