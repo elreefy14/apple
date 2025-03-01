@@ -1,0 +1,5 @@
+class BannersModel {
+  title? id;
+  url? image;
+  BannersModel({this.id, this.image});
+}

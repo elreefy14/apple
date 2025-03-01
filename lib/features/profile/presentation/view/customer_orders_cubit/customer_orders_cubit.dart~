@@ -1,0 +1,38 @@
+import 'package:bloc/bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:masalriyadh/core/services/order_service.dart';
+import 'package:meta/meta.dart';
+
+import '../../../../../core/models/order_model.dart';
+import '../../../../../core/models/product_model.dart';
+
+part 'customer_orders_state.dart';
+
+class CustomerOrdersCubit extends Cubit<CustomerOrdersState> {
+  CustomerOrdersCubit({required this.orderService})
+      : super(CustomerOrdersInitial());
+
+  static CustomerOrdersCubit get(context) => BlocProvider.of(context);
+  final OrderService orderService;
+
+  getCustomerOrders(String customerId) async {
+    emit(CustomerOrdersLoadingState());
+    try {
+      List<OrderModel>? orders =
+          await orderService.getCustomerOrders(customerId: customerId);
+      for (var order in orders!) {
+        List<ProductModel>? products =
+      }
+      emit(CustomerOrdersSuccessState());
+    } catch (e) {
+      emit(CustomerOrdersErrorState(error: e.toString()));
+    }
+  }
+}
+
+class OrderAndProduct {
+  final OrderModel? orderModel;
+  final List<ProductModel>? products;
+
+  OrderAndProduct({required this.orderModel, required this.products});
+}

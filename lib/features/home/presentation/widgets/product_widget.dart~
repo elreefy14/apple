@@ -1,0 +1,88 @@
+import 'package:auto_size_text/auto_size_text.dart';
+import 'package:flutter/material.dart';
+import 'package:masalriyadh/core/constants/colors.dart';
+import 'package:masalriyadh/core/models/all_catigories_model.dart';
+import 'package:masalriyadh/core/models/product_model.dart';
+import 'package:masalriyadh/features/home/presentation/widgets/price_and_sale_price_widget.dart';
+
+import 'add_stock_button.dart';
+
+class ProductWidget extends StatelessWidget {
+  const ProductWidget({
+    super.key,
+    required this.productModel,
+    this.onTap,
+  });
+
+  final ProductModel productModel;
+  final void Function()? onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        decoration: BoxDecoration(
+          color: Colors.white,
+          border:  Border.all(color: Colors.grey[300]!),
+          borderRadius: BorderRadius.circular(5),
+        ),
+        child: Column(
+          children: [
+            Expanded(
+              flex: 2,
+              child: Container(
+                clipBehavior: Clip.antiAliasWithSaveLayer,
+                padding: const EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                    borderRadius: const BorderRadius.only(
+                        topLeft: Radius.circular(5),
+                        topRight: Radius.circular(5)),
+                    image: DecorationImage(
+                      fit: BoxFit.cover,
+                      alignment: Alignment.center,
+                      image: NetworkImage(productModel.images[0].src ??
+                          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSylvdmr4Q_HFCoVxeCfHB2OWWDaELauBH-e8OzYv8mWFkmRjDPCn96-KM&s'),
+                    )),
+              ),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8.0 ,vertical: 2),
+                child: Column(
+                  children: [
+                    Expanded(
+                      child: Center(
+                        child: AutoSizeText(
+                          textAlign: TextAlign.end,
+                          productModel.name ?? '',
+                          style: const TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 14, height: 1.1),
+                          maxLines: 2,
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          const AddStockButton(),
+                          PriceAndSalePriceWidget(
+                            productModel: productModel,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+}
