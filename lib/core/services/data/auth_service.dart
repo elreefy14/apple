@@ -31,41 +31,39 @@ class AuthService {
 
   LoginResponseModel? loginResponseModel;
 
-  Future<bool> login({required String email, required String password}) async {
-    try {
-      Response response = await dio.post(
-          url: 'https://masalriyadh.com/wp-json/jwt-auth/v1/token',
-          body: {
-            'username': email,
-            'password': password,
-          },
-          headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-          }
-          );
-      if (response.statusCode == 200) {
-        loginResponseModel = LoginResponseModel.fromJson(response.data);
-        await SharedHelper.set(
-          key: SharedKeys.token,
-          value: loginResponseModel?.token,
-        );
-        print(SharedHelper.get(key: SharedKeys.token));
-        await SharedHelper.set(
-          key: SharedKeys.userEmail,
-          value: loginResponseModel?.userEmail,
-        );
-        await SharedHelper.set(
-          key: SharedKeys.userName,
-          value: loginResponseModel?.userDisplayName,
-        );
-        return true;
-      } else {
-        return false;
-      }
-    } catch (e) {
-      rethrow;
-    }
-  }
+  // Future<Response?> login({required String email, required String password}) async {
+  //   try {
+  //     Response response = await dio.post(
+  //         url: 'https://masalriyadh.com/wp-json/jwt-auth/v1/token',
+  //         body: {
+  //           'username': email,
+  //           'password': password,
+  //         },
+  //         headers: {
+  //           'Content-Type': 'application/x-www-form-urlencoded',
+  //         }
+  //         );
+  //     if (response.statusCode == 200) {
+  //       loginResponseModel = LoginResponseModel.fromJson(response.data);
+  //       await SharedHelper.set(
+  //         key: SharedKeys.token,
+  //         value: loginResponseModel?.token,
+  //       );
+  //       print(SharedHelper.get(key: SharedKeys.token));
+  //       await SharedHelper.set(
+  //         key: SharedKeys.userEmail,
+  //         value: loginResponseModel?.userEmail,
+  //       );
+  //       await SharedHelper.set(
+  //         key: SharedKeys.userName,
+  //         value: loginResponseModel?.userDisplayName,
+  //       );
+  //     }
+  //     return response;
+  //   } catch (e) {
+  //     rethrow ;
+  //   }
+  // }
 
   Future<bool> validateToken(String token) async {
     final response = await dio.post(
